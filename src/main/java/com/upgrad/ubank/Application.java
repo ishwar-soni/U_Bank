@@ -82,16 +82,22 @@ public class Application {
         System.out.print("Password:");
         String password = scan.nextLine();
 
+        if (doLogin(accountNo, password)) {
+            System.out.println("You are logged in.");
+            isLoggedIn = true;
+            loggedInAccountNo = accountNo;
+        } else {
+            System.out.println("Incorrect Username / Password");
+        }
+    }
+
+    private boolean doLogin (int accountNo, String password) {
         for (int i=0; i<counter; i++) {
             if (accountNo == accounts[i].getAccountNo() && password.equals(accounts[i].getPassword())) {
-                System.out.println("You are logged in.");
-                isLoggedIn = true;
-                loggedInAccountNo = accountNo;
-                return;
+                return true;
             }
         }
-
-        System.out.println("Incorrect Username / Password");
+        return false;
     }
 
     //This method is used to perform register function for the user. If the user is already logged in, then he won't
