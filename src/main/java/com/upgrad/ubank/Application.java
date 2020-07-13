@@ -1,5 +1,7 @@
 package com.upgrad.ubank;
 
+import com.upgrad.ubank.services.AccountService;
+
 import java.util.Scanner;
 
 public class Application {
@@ -7,12 +9,7 @@ public class Application {
     //Scanner to get user input from the console
     private Scanner scan;
 
-    //Account array to store account objects for the application, later in the course this array will be replaced with
-    //database
-    private Account[] accounts;
-
-    //counter is used to track how many accounts are present in the account array
-    private int counter;
+    private AccountService accountService;
 
     //a flag used to check whether a user is logged in or not
     private boolean isLoggedIn;
@@ -22,8 +19,7 @@ public class Application {
 
     public Application () {
         scan = new Scanner(System.in);
-        accounts = new Account[100];
-        counter = 0;
+        accountService = new AccountService();
         isLoggedIn = false;
         loggedInAccountNo = 0;
     }
@@ -82,22 +78,13 @@ public class Application {
         System.out.print("Password:");
         String password = scan.nextLine();
 
-        if (doLogin(accountNo, password)) {
+        if (accountService.login(accountNo, password)) {
             System.out.println("You are logged in.");
             isLoggedIn = true;
             loggedInAccountNo = accountNo;
         } else {
             System.out.println("Incorrect Username / Password");
         }
-    }
-
-    private boolean doLogin (int accountNo, String password) {
-        for (int i=0; i<counter; i++) {
-            if (accountNo == accounts[i].getAccountNo() && password.equals(accounts[i].getPassword())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     //This method is used to perform register function for the user. If the user is already logged in, then he won't
@@ -119,7 +106,7 @@ public class Application {
         System.out.print("Password:");
         String password = scan.nextLine();
 
-        if (doRegister(accountNo, password)) {
+        if (accountService.register(accountNo, password)) {
             System.out.println("You are logged in.");
             isLoggedIn = true;
             loggedInAccountNo = accountNo;
@@ -127,22 +114,6 @@ public class Application {
             System.out.println("User already exists.");
         }
     }
-
-    private boolean doRegister (int accountNo, String password) {
-        for (int i=0; i<counter; i++) {
-            if (accountNo == accounts[i].getAccountNo()) {
-                return false;
-            }
-        }
-
-        Account temp = new Account();
-        temp.setAccountNo(accountNo);
-        temp.setPassword(password);
-        temp.setBalance(0);
-        accounts[counter++] = temp;
-        return true;
-    }
-
 
     private void getAccount () {
         if (!isLoggedIn) {
