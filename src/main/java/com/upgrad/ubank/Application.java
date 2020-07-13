@@ -1,6 +1,7 @@
 package com.upgrad.ubank;
 
 import com.upgrad.ubank.services.AccountService;
+import com.upgrad.ubank.services.AccountServiceImpl;
 
 import java.util.Scanner;
 
@@ -17,9 +18,9 @@ public class Application {
     //an attribute to store account no of the logged in user
     private int loggedInAccountNo;
 
-    public Application () {
+    public Application (AccountService accountService) {
         scan = new Scanner(System.in);
-        accountService = new AccountService();
+        this.accountService = accountService;
         isLoggedIn = false;
         loggedInAccountNo = 0;
     }
@@ -184,7 +185,8 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        Application application = new Application();
+        AccountService accountService = new AccountServiceImpl();
+        Application application = new Application(accountService);
         application.start();
     }
 }
