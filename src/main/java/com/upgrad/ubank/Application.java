@@ -119,10 +119,19 @@ public class Application {
         System.out.print("Password:");
         String password = scan.nextLine();
 
+        if (doRegister(accountNo, password)) {
+            System.out.println("You are logged in.");
+            isLoggedIn = true;
+            loggedInAccountNo = accountNo;
+        } else {
+            System.out.println("User already exists.");
+        }
+    }
+
+    private boolean doRegister (int accountNo, String password) {
         for (int i=0; i<counter; i++) {
             if (accountNo == accounts[i].getAccountNo()) {
-                System.out.println("User already exists.");
-                return;
+                return false;
             }
         }
 
@@ -131,10 +140,9 @@ public class Application {
         temp.setPassword(password);
         temp.setBalance(0);
         accounts[counter++] = temp;
-        System.out.println("You are logged in.");
-        isLoggedIn = true;
-        loggedInAccountNo = accountNo;
+        return true;
     }
+
 
     private void getAccount () {
         if (!isLoggedIn) {
