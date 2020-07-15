@@ -157,7 +157,14 @@ public class Application {
         System.out.println("*********************");
 
         System.out.print("Amount: ");
-        int amount = Integer.parseInt(scan.nextLine());
+        int amount = 0;
+
+        try {
+            amount = Integer.parseInt(scan.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Amount should be in numeric form");
+            return;
+        }
 
         Account account = accountService.deposit(loggedInAccountNo, amount);
         if (account == null) {
@@ -178,7 +185,14 @@ public class Application {
         System.out.println("*********************");
 
         System.out.print("Amount: ");
-        int amount = Integer.parseInt(scan.nextLine());
+        int amount = 0;
+
+        try {
+            amount = Integer.parseInt(scan.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Amount should be in numeric form");
+            return;
+        }
 
         Account account = accountService.withdraw(loggedInAccountNo, amount);
         if (account == null) {
