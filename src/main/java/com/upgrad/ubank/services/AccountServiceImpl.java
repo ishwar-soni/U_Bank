@@ -21,6 +21,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public boolean login (Account account) {
+        if (account == null) {
+            return false;
+        }
         for (int i=0; i<counter; i++) {
             if (account.getAccountNo() == accounts[i].getAccountNo() && account.getPassword().equals(accounts[i].getPassword())) {
                 return true;
@@ -31,6 +34,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public boolean register (Account account) {
+        if (account == null) {
+            return false;
+        }
         for (int i=0; i<counter; i++) {
             if (account.getAccountNo() == accounts[i].getAccountNo()) {
                 return false;
