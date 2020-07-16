@@ -2,6 +2,7 @@ package com.upgrad.ubank.services;
 
 import com.upgrad.ubank.dtos.Account;
 import com.upgrad.ubank.dtos.Transaction;
+import com.upgrad.ubank.exceptions.AccountAlreadyRegisteredException;
 import com.upgrad.ubank.exceptions.AccountNotFoundException;
 import com.upgrad.ubank.exceptions.IncorrectPasswordException;
 
@@ -37,13 +38,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public boolean register (Account account) {
+    public boolean register (Account account) throws AccountAlreadyRegisteredException {
         if (account == null) {
-            return false;
+            throw new NullPointerException("Account object was null");
         }
         for (int i=0; i<counter; i++) {
             if (account.getAccountNo() == accounts[i].getAccountNo()) {
-                return false;
+                throw new AccountAlreadyRegisteredException("Account no already registered.");
             }
         }
 
