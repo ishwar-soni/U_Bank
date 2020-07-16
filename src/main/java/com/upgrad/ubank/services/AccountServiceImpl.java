@@ -22,7 +22,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public boolean login (Account account) {
         if (account == null) {
-            return false;
+            throw new NullPointerException("Account object was null");
         }
         for (int i=0; i<counter; i++) {
             if (account.getAccountNo() == accounts[i].getAccountNo() && account.getPassword().equals(accounts[i].getPassword())) {
