@@ -1,5 +1,13 @@
 package com.upgrad.ubank.servlets;
 
+import com.upgrad.ubank.dtos.Account;
+import com.upgrad.ubank.exceptions.AccountNotFoundException;
+import com.upgrad.ubank.exceptions.IncorrectPasswordException;
+import com.upgrad.ubank.services.AccountService;
+import com.upgrad.ubank.services.AccountServiceImpl;
+import com.upgrad.ubank.services.TransactionService;
+import com.upgrad.ubank.services.TransactionServiceImpl;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +16,16 @@ import java.io.IOException;
 import java.util.Enumeration;
 
 public class HomeServlet extends HttpServlet {
+
+    private AccountService accountService;
+    private TransactionService transactionService;
+
+    @Override
+    public void init() throws ServletException {
+        transactionService = new TransactionServiceImpl();
+        accountService = new AccountServiceImpl(transactionService);
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.getWriter().println("Learn @ Upgrad");
@@ -15,11 +33,38 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Enumeration<String> params = req.getParameterNames();
-        while (params.hasMoreElements()) {
-            String param = params.nextElement();
-            String value = req.getParameter(param);
-            resp.getWriter().println(param + ": " + value);
+        String actionType = req.getParameter("actionType");
+        int accountNo = Integer.parseInt(req.getParameter("accountNo"));
+        String password = req.getParameter("password");
+        Account account = new Account();
+        account.setAccountNo(accountNo);
+        account.setPassword(password);
+        switch (actionType) {
+            case "Log In":
+                try {
+                    accountService.login(account);
+                    req.getRequestDispatcher("/Home.jsp").forward(req, resp);
+                } catch (Exception e) {
+                    req.setAttribute("isError", true);
+                    req.setAttribute("error", e.getMessage());
+                    req.getRequestDispatcher("/index.jsp").forward(req, resp);
+                }
+                break;
+
+            case "Register":
+                try {
+                    accountService.register(account);
+                    req.getRequestDispatcher("/Home.jsp").forward(req, resp);
+                } catch (Exception e) {
+                    req.setAttribute("isError", true);
+                    req.setAttribute("error", e.getMessage());
+                    req.getRequestDispatcher("/index.jsp").forward(req, resp);
+                }
+                break;
+
+            default:
+                System.out.println("No such action type");
+                break;
         }
     }
 }
