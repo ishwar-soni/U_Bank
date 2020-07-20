@@ -6,11 +6,13 @@ import com.upgrad.ubank.exceptions.InsufficientBalanceException;
 import com.upgrad.ubank.services.AccountService;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@WebServlet("/utils")
 public class AccountUtilsServlet extends HttpServlet {
 
     private AccountService accountService;
