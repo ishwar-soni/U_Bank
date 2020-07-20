@@ -43,6 +43,9 @@ public class HomeServlet extends HttpServlet {
             case "Log In":
                 try {
                     accountService.login(account);
+                    req.getSession().setAttribute("isLoggedIn", true);
+                    req.getSession().setAttribute("accountNo", accountNo);
+                    req.getSession().setAttribute("balance", accountService.getAccount(accountNo).getBalance());
                     req.getRequestDispatcher("/Home.jsp").forward(req, resp);
                 } catch (Exception e) {
                     req.setAttribute("isError", true);
@@ -54,6 +57,9 @@ public class HomeServlet extends HttpServlet {
             case "Register":
                 try {
                     accountService.register(account);
+                    req.getSession().setAttribute("isLoggedIn", true);
+                    req.getSession().setAttribute("accountNo", accountNo);
+                    req.getSession().setAttribute("balance", accountService.getAccount(accountNo).getBalance());
                     req.getRequestDispatcher("/Home.jsp").forward(req, resp);
                 } catch (Exception e) {
                     req.setAttribute("isError", true);

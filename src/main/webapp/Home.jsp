@@ -1,13 +1,24 @@
+<%
+    try {
+        Boolean isLoggedIn = (Boolean) session.getAttribute("isLoggedIn");
+        if (!isLoggedIn) {
+            response.sendRedirect("/index.jsp");
+        }
+    } catch (Exception ex) {
+        response.sendRedirect("/index.jsp");
+    }
+%>
+
 <html>
     <head>
         <title>Home</title>
     </head>
 
     <body>
-        Account No:
+        Account No: <%= session.getAttribute("accountNo") %>
         <br><br>
 
-        Balance:
+        Balance: <%= session.getAttribute("balance") %>
         <br><br>
 
         <a href="/ubank/Deposit.jsp">Deposit</a>
