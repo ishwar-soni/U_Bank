@@ -1,3 +1,12 @@
+<%
+    try {
+        Boolean isLoggedIn = (Boolean) session.getAttribute("isLoggedIn");
+        if (isLoggedIn) {
+            response.sendRedirect("/Home.jsp");
+        }
+    } catch (Exception ignored) {}
+%>
+
 <html>
     <head>
         <title>U-Bank</title>
