@@ -17,8 +17,8 @@ import java.util.Enumeration;
 
 public class HomeServlet extends HttpServlet {
 
-    private AccountService accountService;
-    private TransactionService transactionService;
+    public static AccountService accountService;
+    public static TransactionService transactionService;
 
     @Override
     public void init() throws ServletException {

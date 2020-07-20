@@ -26,5 +26,25 @@
         <a href="/ubank/AccountStatement.jsp">Account Statement</a>
         <br>
         <a href="/ubank/Logout.jsp">Logout</a>
+
+        <br><br>
+        <%
+            try {
+                Boolean isError = (Boolean) request.getAttribute("isError");
+                if (isError) {
+                    out.println(request.getAttribute("error"));
+                }
+            } catch (NullPointerException ignored) {}
+        %>
+
+        <br><br>
+        <%
+            try {
+                Boolean isMessage = (Boolean) request.getAttribute("isMessage");
+                if (isMessage) {
+                    out.println(request.getAttribute("message"));
+                }
+            } catch (NullPointerException ignored) {}
+        %>
     </body>
 </html>
