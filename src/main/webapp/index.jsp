@@ -20,5 +20,14 @@
             <input type="submit" value="Log In" name="actionType"/>
             <input type="submit" value="Register" name="actionType"/>
         </form>
+
+        <%
+            try {
+                Boolean isError = (Boolean) request.getAttribute("isError");
+                if (isError) {
+                    out.println(request.getAttribute("error"));
+                }
+            } catch (NullPointerException ignored) {}
+        %>
     </body>
 </html>
