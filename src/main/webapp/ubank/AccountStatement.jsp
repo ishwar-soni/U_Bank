@@ -1,5 +1,5 @@
 <%@ page import="com.upgrad.ubank.dtos.Transaction" %>
-<%@ page import="com.upgrad.ubank.services.TransactionServiceImpl" %>
+<%@ page import="com.upgrad.ubank.services.ServiceFactory" %>
 
 <%
     try {
@@ -28,7 +28,7 @@
 
         <%
             int accountNo = (Integer) session.getAttribute("accountNo");
-            Transaction[] transactions = TransactionServiceImpl.getInstance().getTransactions(accountNo);
+            Transaction[] transactions = new ServiceFactory().getTransactionService().getTransactions(accountNo);
             if (transactions == null) {
                 out.println("This feature is not available for mobile");
                 return;

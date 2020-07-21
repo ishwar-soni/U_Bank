@@ -3,10 +3,7 @@ package com.upgrad.ubank.servlets;
 import com.upgrad.ubank.dtos.Account;
 import com.upgrad.ubank.exceptions.AccountNotFoundException;
 import com.upgrad.ubank.exceptions.IncorrectPasswordException;
-import com.upgrad.ubank.services.AccountService;
-import com.upgrad.ubank.services.AccountServiceImpl;
-import com.upgrad.ubank.services.TransactionService;
-import com.upgrad.ubank.services.TransactionServiceImpl;
+import com.upgrad.ubank.services.*;
 import com.upgrad.ubank.utils.AccountNoValidator;
 import com.upgrad.ubank.utils.PasswordValidator;
 
@@ -22,10 +19,12 @@ import java.util.Enumeration;
 public class HomeServlet extends HttpServlet {
 
     private AccountService accountService;
+    private ServiceFactory serviceFactory;
 
     @Override
     public void init() throws ServletException {
-        accountService = AccountServiceImpl.getInstance();
+        serviceFactory = new ServiceFactory();
+        accountService = serviceFactory.getAccountService();
     }
 
     @Override

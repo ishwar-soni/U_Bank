@@ -5,6 +5,7 @@ import com.upgrad.ubank.exceptions.AccountNotFoundException;
 import com.upgrad.ubank.exceptions.InsufficientBalanceException;
 import com.upgrad.ubank.services.AccountService;
 import com.upgrad.ubank.services.AccountServiceImpl;
+import com.upgrad.ubank.services.ServiceFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,10 +18,12 @@ import java.io.IOException;
 public class AccountUtilsServlet extends HttpServlet {
 
     private AccountService accountService;
+    private ServiceFactory serviceFactory;
 
     @Override
     public void init() throws ServletException {
-        accountService = AccountServiceImpl.getInstance();
+        serviceFactory = new ServiceFactory();
+        accountService = serviceFactory.getAccountService();
     }
 
     @Override
