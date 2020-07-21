@@ -4,6 +4,7 @@ import com.upgrad.ubank.dtos.Account;
 import com.upgrad.ubank.exceptions.AccountNotFoundException;
 import com.upgrad.ubank.exceptions.InsufficientBalanceException;
 import com.upgrad.ubank.services.AccountService;
+import com.upgrad.ubank.services.AccountServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +20,7 @@ public class AccountUtilsServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        accountService = HomeServlet.accountService;
+        accountService = AccountServiceImpl.getInstance();
     }
 
     @Override

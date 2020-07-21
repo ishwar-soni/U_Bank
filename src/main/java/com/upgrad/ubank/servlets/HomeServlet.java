@@ -21,13 +21,11 @@ import java.util.Enumeration;
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet {
 
-    public static AccountService accountService;
-    public static TransactionService transactionService;
+    private AccountService accountService;
 
     @Override
     public void init() throws ServletException {
-        transactionService = new TransactionServiceImpl();
-        accountService = new AccountServiceImpl(transactionService);
+        accountService = AccountServiceImpl.getInstance();
     }
 
     @Override
