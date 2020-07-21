@@ -7,6 +7,7 @@ import com.upgrad.ubank.services.AccountService;
 import com.upgrad.ubank.services.AccountServiceImpl;
 import com.upgrad.ubank.services.TransactionService;
 import com.upgrad.ubank.services.TransactionServiceImpl;
+import com.upgrad.ubank.utils.AccountNoValidator;
 import com.upgrad.ubank.utils.PasswordValidator;
 
 import javax.servlet.ServletException;
@@ -39,6 +40,12 @@ public class HomeServlet extends HttpServlet {
         String actionType = req.getParameter("actionType");
         int accountNo = Integer.parseInt(req.getParameter("accountNo"));
         String password = req.getParameter("password");
+        if (!AccountNoValidator.validateAccountNo(accountNo)) {
+            req.setAttribute("isError", true);
+            req.setAttribute("error", "Account no doesn't meet all the criteria.");
+            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+            return;
+        }
         if (!PasswordValidator.validatePassword(password)) {
             req.setAttribute("isError", true);
             req.setAttribute("error", "Password doesn't meet all the criteria.");
