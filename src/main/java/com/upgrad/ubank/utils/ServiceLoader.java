@@ -12,6 +12,8 @@ public class ServiceLoader implements ServletContextListener {
             Class.forName("com.upgrad.ubank.services.AccountServiceImpl");
             Class.forName("com.upgrad.ubank.services.TransactionServiceImpl");
             Class.forName("com.upgrad.ubank.services.TransactionServiceImplMobile");
+            Class.forName("com.upgrad.ubank.services.EmailNotificationService");
+            Class.forName("com.upgrad.ubank.services.SMSNotificationService");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
