@@ -42,7 +42,7 @@ public class Printer <T> {
         Printer<Transaction> transactionPrinter = new Printer<Transaction>();
         transactionPrinter.print(transactions);
 
-        Integer[] array = {new Integer(1), new Integer(2), new Integer(3)};
+        Integer[] array = {1, 2, 3};
         Printer<Integer> printer = new Printer<>();
         printer.print(array);
     }
