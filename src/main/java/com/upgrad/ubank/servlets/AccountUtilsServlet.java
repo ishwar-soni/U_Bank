@@ -41,7 +41,7 @@ public class AccountUtilsServlet extends HttpServlet {
                     req.setAttribute("isMessage", true);
                     req.setAttribute("message", "Money successfully deposited into account.");
                     req.getRequestDispatcher("/Home.jsp").forward(req, resp);
-                } catch (AccountNotFoundException e) {
+                } catch (Exception e) {
                     req.setAttribute("isError", true);
                     req.setAttribute("error", e.getMessage());
                     req.getRequestDispatcher("/Home.jsp").forward(req, resp);
