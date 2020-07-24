@@ -1,5 +1,6 @@
 <%@ page import="com.upgrad.ubank.dtos.Transaction" %>
 <%@ page import="com.upgrad.ubank.services.ServiceFactory" %>
+<%@ page import="java.util.List" %>
 
 <%
     try {
@@ -28,11 +29,11 @@
 
         <%
             int accountNo = (Integer) session.getAttribute("accountNo");
-            Transaction[] transactions = new ServiceFactory().getTransactionService().getTransactions(accountNo);
+            List<Transaction> transactions = new ServiceFactory().getTransactionService().getTransactions(accountNo);
             if (transactions == null) {
                 out.println("This feature is not available for mobile");
                 return;
-            } else if (transactions[0] == null) {
+            } else if (transactions.isEmpty()) {
                 out.println("No transaction exists for you.");
                 return;
             }

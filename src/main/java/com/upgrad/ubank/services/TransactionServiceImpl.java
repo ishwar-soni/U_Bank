@@ -7,6 +7,7 @@ import com.upgrad.ubank.interfaces.Observer;
 import com.upgrad.ubank.interfaces.Subject;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class TransactionServiceImpl implements TransactionService, Observer {
 
@@ -46,8 +47,8 @@ public class TransactionServiceImpl implements TransactionService, Observer {
     }
 
     @Override
-    public Transaction[] getTransactions(int accountNo) throws Exception {
-        Transaction[] temp;
+    public List<Transaction> getTransactions(int accountNo) throws Exception {
+        List<Transaction> temp;
         try {
             temp = transactionDAO.findByAccountNo(accountNo);
         } catch (SQLException e) {
