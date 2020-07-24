@@ -4,15 +4,9 @@ import com.upgrad.ubank.dtos.Account;
 import com.upgrad.ubank.dtos.Transaction;
 
 public class Printer {
-    public void printAccounts (Account[] accounts) {
-        for (Account account: accounts) {
-            System.out.println(account);
-        }
-    }
-
-    public void printTransactions (Transaction[] transactions) {
-        for (Transaction transaction: transactions) {
-            System.out.println(transaction);
+    public void print (Object[] objects) {
+        for (Object obj: objects) {
+            System.out.println(obj);
         }
     }
 
@@ -43,7 +37,10 @@ public class Printer {
         Transaction[] transactions = {transaction1, transaction2};
 
         Printer printer = new Printer();
-        printer.printAccounts(accounts);
-        printer.printTransactions(transactions);
+        printer.print(accounts);
+        printer.print(transactions);
+
+        Object[] objects = {account1, transaction1};
+        printer.print(objects);
     }
 }
