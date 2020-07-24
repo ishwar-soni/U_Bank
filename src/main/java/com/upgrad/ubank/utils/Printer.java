@@ -3,10 +3,10 @@ package com.upgrad.ubank.utils;
 import com.upgrad.ubank.dtos.Account;
 import com.upgrad.ubank.dtos.Transaction;
 
-public class Printer {
-    public void print (Object[] objects) {
-        for (Object obj: objects) {
-            System.out.println(obj);
+public class Printer <T> {
+    public void print (T[] elements) {
+        for (T element: elements) {
+            System.out.println(element);
         }
     }
 
@@ -36,11 +36,10 @@ public class Printer {
         Account[] accounts = {account1, account2};
         Transaction[] transactions = {transaction1, transaction2};
 
-        Printer printer = new Printer();
-        printer.print(accounts);
-        printer.print(transactions);
+        Printer<Account> accountPrinter = new Printer<>();
+        accountPrinter.print(accounts);
 
-        Object[] objects = {account1, transaction1};
-        printer.print(objects);
+        Printer<Transaction> transactionPrinter = new Printer<>();
+        transactionPrinter.print(transactions);
     }
 }
