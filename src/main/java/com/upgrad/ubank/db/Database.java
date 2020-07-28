@@ -15,11 +15,9 @@ public class Database {
 
     public static Connection getConnection () {
         if (connection == null) {
-            BufferedReader br = null;
+            String path = System.getProperty("catalina.base")+"\\..\\..\\src\\main\\java\\com\\upgrad\\ubank\\db\\database.config";
             Map<String, String> credentials = null;
-            try {
-                String path = System.getProperty("catalina.base")+"\\..\\..\\src\\main\\java\\com\\upgrad\\ubank\\db\\database.config";;
-                br = new BufferedReader(new FileReader(path));
+            try (BufferedReader br = new BufferedReader(new FileReader(path))) {
                 credentials = new HashMap<>();
                 String line;
                 while ((line=br.readLine()) != null) {
@@ -30,12 +28,6 @@ public class Database {
                 System.out.println("Config file not found.");
             } catch (IOException e) {
                 System.out.println("Error while reading config file.");
-            } finally {
-                try {
-                    br.close();
-                } catch (Exception e) {
-                    System.out.println("Error while closing stream.");
-                }
             }
             String url = credentials.get("url");
             String username = credentials.get("username");
