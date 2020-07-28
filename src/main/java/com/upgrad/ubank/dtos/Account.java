@@ -5,6 +5,14 @@ public class Account {
     private String password;
     private int balance;
 
+    public Account(int accountNo, String password, int balance) {
+        this.accountNo = accountNo;
+        this.password = password;
+        this.balance = balance;
+    }
+
+    public Account () {}
+
     public int getAccountNo() {
         return accountNo;
     }
