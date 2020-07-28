@@ -85,6 +85,7 @@ gradle-app.setting
 .idea/**/sqlDataSources.xml
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
+.idea/jarRepositories.xml
 
 # Gradle:
 .idea/**/gradle.xml
